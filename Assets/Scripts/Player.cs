@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if(!myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; };
+        if(!myFeet.IsTouchingLayers(LayerMask.GetMask("Ground", "Climbing"))) { return; };
 
         if(CrossPlatformInputManager.GetButtonDown("Jump"))
         {
@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
             isAlive = false;
             myAnimator.SetTrigger("Die");
             myRigidbody.velocity = deathKick;
+            FindObjectOfType<GameSession>().ProcessDeath();
         }
     }
 }
